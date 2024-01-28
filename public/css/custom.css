@@ -1,3 +1,4 @@
+/* GENERAL */
 .bg-DimGrey {
     background: #696969;
 }
@@ -12,5 +13,18 @@
 .shadow-01 {
     box-shadow: 3px 6px 6px rgba(0, 0, 0, 0.449);
 }
+
+/* TRANSACTIONS - VIEW */
+#prevTransaction:hover,
+#nextTransaction:hover {
+    cursor: pointer;
+    background-color: #333; 
+    border-radius: 5px;
+}
+#prevTransaction:active,
+#nextTransaction:active {
+    background-color: #555555; /* Cor ao clicar */
+}
+
 
 

@@ -20,11 +20,15 @@ class TransationController extends Controller
 
         // Formatando datas para exibir como "Domingo, 14"
         $formattedTransactions = $this->formatDates($transactions);
+        $formattedRevenues = $this->formatDates($revenues);
+        $formattedExpenses = $this->formatDates($expenses);
 
-    
-        return view('transactions', ['transactions' => $formattedTransactions,]);
+        return view('transactions', [
+            'transactions' => $formattedTransactions, 
+            'revenues' => $formattedRevenues, 
+            'expenses' => $formattedExpenses
+        ]);
     }
-
     
     private function formatDates($data) 
     {
