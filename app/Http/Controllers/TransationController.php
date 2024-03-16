@@ -5,28 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\Revenue;
 
+use Illuminate\Http\Request;
+
 use Carbon\Carbon;
 
 class TransationController extends Controller
 {
-    public function index()
+    public function index2()
     {
         Carbon::setLocale('pt_BR');
 
         $revenues = Revenue::all();
         $expenses = Expense::all();
 
-        $transactions = $revenues->concat($expenses)->sortBy('date');
+        $transactions = $revenues->concat($expenses)->sortByDesc('date');
+
 
         // Formatando datas para exibir como "Domingo, 14"
-        $formattedTransactions = $this->formatDates($transactions);
-        $formattedRevenues = $this->formatDates($revenues);
-        $formattedExpenses = $this->formatDates($expenses);
+        //$formattedTransactions = $this->formatDates($transactions);
+        //$formattedRevenues = $this->formatDates($revenues);
+        //$formattedExpenses = $this->formatDates($expenses);
 
         return view('transactions', [
-            'transactions' => $formattedTransactions, 
-            'revenues' => $formattedRevenues, 
-            'expenses' => $formattedExpenses
+            'transactions' => $transactions, 
+            'revenues' => $revenues, 
+            'expenses' => $expenses
         ]);
     }
     
@@ -43,4 +46,36 @@ class TransationController extends Controller
         return $data;
     
     }
+
+
+
+    public function index()
+    {
+        // Defina o mês inicial aqui ou ajuste conforme necessário
+        $currentMonth = 1;
+
+        // Adicione lógica para obter transações (este exemplo usa o mesmo código que em getTransactionsByMonth)
+        $revenues = Revenue::whereMonth('date', '=', $currentMonth)->get();
+        $expenses = Expense::whereMonth('date', '=', $currentMonth)->get();
+
+        $transactions = $revenues->concat($expenses);
+
+        return view('transactions', ['currentMonth' => $currentMonth, 'transactions' => $transactions]);
+    }
+
+    public function getTransactionsByMonth($numeroDoMes)
+    {
+        // Adicione lógica para obter transações com base no número do mês
+        $revenues = Revenue::whereMonth('date', '=', $numeroDoMes)->get();
+        $expenses = Expense::whereMonth('date', '=', $numeroDoMes)->get();
+    
+        $transactions = $revenues->concat($expenses);
+    
+        // Retorne os dados para o frontend
+        return response()->json(['transactions' => $transactions]);
+    }
+    
+
+
+
 }

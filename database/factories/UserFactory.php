@@ -15,11 +15,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'name' => 'PEDRO CLISESQUE',
+            'cpf' => '228.062.518-00',
+            'email' => 'clisesque2k18@gmail.com',
+            'password' => '$2a$12$6Mc87M2RU2iQ8gmnQHkoQORsRZlBPxVEZh0pybypsmSf/72s0XFqO', 
             'remember_token' => Str::random(10),
+            'active' => 1
         ];
     }
 
