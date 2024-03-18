@@ -15,16 +15,13 @@
 }
 
 /* TRANSACTIONS - VIEW */
-#prevTransaction:hover,
-#nextTransaction:hover {
-    cursor: pointer;
-    background-color: #333; 
-    border-radius: 5px;
-}
-#prevTransaction:active,
-#nextTransaction:active {
-    background-color: #555555; /* Cor ao clicar */
+.arrow-icon {
+    font-size: 30px; 
+    color: white;
 }
 
+.arrow-icon:hover {
+    color: blue; 
+}
 
 

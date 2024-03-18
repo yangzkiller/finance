@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TransationController;
+use App\Http\Controllers\TransactionController;
 
 require __DIR__.'/auth.php';
 
@@ -17,10 +17,12 @@ Route::get('/dashboard', function () {
 
 
 
-
-
-
-
-
-Route::get('/transações', [TransationController::class, 'index'])
-    ->name('IndexTransations');
+Route::middleware('auth')->group(function () 
+{
+    Route::prefix('transacoes')->group(function () 
+    {
+        Route::get('/exibir/{year?}/{month?}', [TransactionController::class, 'index'])
+            ->name('transactions_index');
+    });   
+});
+    
